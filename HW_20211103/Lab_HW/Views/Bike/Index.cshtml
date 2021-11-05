@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Lab_HW.Models.Bike>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <form action="/Bike/Index" method="post">
+                    <input name="id" placeholder="Id" />
+                    <button type="submit">搜尋</button>
+                </form>
+            </th>
+            <th>
+                <form action="/Bike/Index" method="post">
+                    <input name="lv" placeholder="Lv" />
+                    <button type="submit">搜尋</button>
+                </form>
+            </th>
+            <th>
+                <form action="/Bike/Index" method="post">
+                    <input name="cc" placeholder="cc" />
+                    <button type="submit">搜尋</button>
+                </form>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+
+<hr>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<p>
+    <a asp-action="Index">Reset</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cc)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
