@@ -1,4 +1,4 @@
-using HW_20211105.Models;
+using HW_20211105.Models.Meet;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

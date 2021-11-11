@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "_Layout";
+}
+@using HW_20211105.Models.Meet;
+@model HW_20211105.Models.Meet.TblMeetingAppointment;
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會議預約系統</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container" style="text-align: center;">
+        <div class="row border border-white border-top-1"
+             style="vertical-align: middle;font-size: larger;height: 30px;">
+            <div class="col-3"></div>
+            <div class="col-4">會議預約系統</div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row" style="height: 35%;">
+            <div class="col-6 border border-white border-top-1"></div>
+            <form action="/Meet/Insert" method="post" id="form">
+                <div class="col-8 border border-white border-top-1" style="text-align: left;left:15%">
+                    <br>
+                    <span>會議主題：</span>
+                    <input type="text" style="width:75%" asp-for="Subject">
+                    <br><br>
+                    <span>會議時間：</span>
+                    <input type="datetime-local" style="width:31%" asp-for="StartDateTime">
+                    <span>　至　</span>
+                    <input type="datetime-local" style="width:31%" asp-for="EndDateTime">
+                    <br><br>
+                    <span style="width: 80px;">會議室：　</span>
+                    <select id="" style="width: 25%;" asp-for="RoomId">
+                        @foreach (var item in ViewBag.Room as List<TblMeetingRoom>)
+                        {
+                            <option value="@item.RoomId">@item.Name</option>
+                        }
+                    </select>
+                    <span style="margin-left:20px;">與會人數：</span>
+                    <input type="text" style="width: 24%;" asp-for="AttendCount">
+                    <hr style="border:2px aliceblue solid">
+                    <div style="text-align: right;padding-top: 5px;padding-right: 20px;">
+                        <span>申請人：</span>
+                        <select id="" style="width:25%" asp-for="BookedBy">
+                            @foreach (var item in ViewData["select"] as List<select>)
+                            {
+                                <option value="@item.value">@item.display</option>
+                            }
+                        </select>
+                    </div>
+                    <br>
+                    <div style="text-align: right;padding-right: 20px;">
+                        <button id="send" type="button" class="button btn-primary">確定申請</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-3 border border-white border-top-1"></div>
+        </div>
+    </div>
+
+    <script>
+
+        document.getElementById('send').addEventListener('click', function () {
+            debugger
+            if (document.querySelectorAll('input')[0].value == '') {
+                alert('請填寫會議主題');
+                return;
+            }
+
+            if (document.querySelectorAll('input')[1].value == '') {
+                alert('請填寫會議開始時間');
+                return;
+            }
+
+            if (document.querySelectorAll('input')[2].value == '') {
+                alert('請填寫會議結束時間');
+                return;
+            }
+
+            if (Date.parse(document.querySelectorAll('input')[1].value) > Date.parse(document.querySelectorAll('input')[2].value)) {
+                alert('日期格式錯誤');
+                return;
+            }
+            else if (Date.parse(document.querySelectorAll('input')[1].value) < Date.now()) {
+                alert('日期格式錯誤');
+                return;
+            }
+
+
+            if (document.querySelectorAll('input')[3].value == '') {
+                alert('與會人數不得為空');
+                return;
+            }
+
+
+            if (document.querySelectorAll('input')[3].value == '0') {
+                alert('與會人數不正確');
+                return;
+            }
+
+
+            if (/\D{1}/.test(document.querySelectorAll('input')[3].value)) {
+                alert('與會人數填寫格式不正確');
+                return;
+            }
+
+            alert('會議室已預約');
+
+            document.getElementById('form').submit();
+
+            //var x = document.getElementById('form');
+
+            //var request = new XMLHttpRequest();
+            //request.open("post", "/Meet/Insert");
+            //request.onload = x;
+            //request.send();          
+
+            //alert('會議室以預約');
+
+            //location.reload();
+
+        })
+
+
+
+
+    </script>
+
+</body>
+</html>
