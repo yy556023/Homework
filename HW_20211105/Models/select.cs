@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HW_20211105.Models.Meet
+namespace HW_20211105.Models
 {
     public class select
     {

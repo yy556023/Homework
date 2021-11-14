@@ -5,11 +5,12 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace HW_20211105.Models.Meet
+namespace HW_20211105.Models
 {
-    public partial class TblDepartment
+    public partial class TblMeetingRoom
     {
-        public int Id { get; set; }
+        public int RoomId { get; set; }
         public string Name { get; set; }
+        public int? RoomSize { get; set; }
     }
 }

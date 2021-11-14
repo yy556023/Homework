@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HW_20211105.Models.Meet;
+using HW_20211105.Models;
 
 namespace HW_20211105.Controllers
 {
