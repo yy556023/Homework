@@ -26,11 +26,11 @@ namespace Lab_HW.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string? id,string? lv,string? cc)
+        public ActionResult Index(string id, string lv, string cc)
         {
             List<Bike> Data = new List<Bike>();
 
-            if(id != null)
+            if (id != null)
             {
                 Data = bikes.Where(x => x.Id == int.Parse(id)).ToList();
             }
