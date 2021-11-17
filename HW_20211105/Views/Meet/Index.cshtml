@@ -99,14 +99,14 @@
 
             alert('會議室已預約');
 
-            document.getElementById('form').submit();
+            //document.getElementById('form').submit();
 
-            //var x = document.getElementById('form');
+            var x = document.getElementById('form');
 
-            //var request = new XMLHttpRequest();
-            //request.open("post", "/Meet/Insert");
+            var request = new XMLHttpRequest();
+            request.open("post", "/Meet/Insert");
             //request.onload = x;
-            //request.send();
+            request.send(x);
 
             //location.reload();
 
