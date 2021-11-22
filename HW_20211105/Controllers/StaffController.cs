@@ -18,6 +18,12 @@ namespace HW_20211105.Controllers
             _context = context;
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
         // GET: Staff
         public async Task<IActionResult> Index()
         {
@@ -123,8 +129,7 @@ namespace HW_20211105.Controllers
                 return NotFound();
             }
 
-            var tblStaff = await _context.TblStaff
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var tblStaff = await _context.TblStaff.FindAsync(id);
             if (tblStaff == null)
             {
                 return NotFound();
@@ -147,13 +152,13 @@ namespace HW_20211105.Controllers
         public void MoreLinq()
         {
             // (a)
-            var Lista =  _context.TblStaff.Where(x => x.Department == 1).ToList();
+            var Lista = _context.TblStaff.Where(x => x.Department == 1).ToList();
             // (b)
-            var Listb =  _context.TblStaff.OrderByDescending(x => x.Age).ToList();
+            var Listb = _context.TblStaff.OrderByDescending(x => x.Age).ToList();
             // (c)
             var Listc = ((uint?)_context.TblStaff.Sum(x => x.Age));
             // (d)
-            var Listd =  _context.TblStaff.Where(x => x.Department == 2 || x.Department == 3).Count();
+            var Listd = _context.TblStaff.Where(x => x.Department == 2 || x.Department == 3).Count();
             // (e)
             var Liste = _context.TblStaff.Where(x => x.Name.Contains("e")).Max(x => x.Age);
             // (f)
@@ -185,6 +190,13 @@ namespace HW_20211105.Controllers
         private bool TblStaffExists(int id)
         {
             return _context.TblStaff.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        [ActionName("CreateAjax")]
+        public async Task<IActionResult> CreateAjax(TblStaff model)
+        {
+            return RedirectToAction(nameof(Index));
         }
     }
 }

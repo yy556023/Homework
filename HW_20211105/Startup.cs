@@ -27,6 +27,8 @@ namespace HW_20211105
         {
             services.AddControllersWithViews();
             services.AddDbContext<HomeWorkContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Link")));
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +48,7 @@ namespace HW_20211105
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
@@ -53,7 +56,7 @@ namespace HW_20211105
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Staff}/{action=Login}/{id?}");
             });
         }
     }
