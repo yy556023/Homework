@@ -61,7 +61,17 @@ namespace HW_20211105.Models
 
             modelBuilder.Entity<TblStaff>(entity =>
             {
+                entity.Property(e => e.Email)
+                    .HasColumnName("email")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .HasColumnName("password")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
