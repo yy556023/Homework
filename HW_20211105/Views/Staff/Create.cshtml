@@ -1,6 +1,7 @@
 @model HW_20211105.Models.TblStaff
 
 @{
+    Layout = "_rege";
     ViewData["Title"] = "Create";
 }
 
@@ -8,43 +9,55 @@
 
 <h4>TblStaff</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Department" class="control-label"></label>
-                <select asp-for="Department" class="form-control">
-                    <option value="1">軟體開發部</option>
-                    <option value="2">人事部</option>
-                    <option value="3">財務部</option>
-                    <option value="4">客服部</option>
-                    <option value="5">業務部</option>
-                </select>
 
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+            <div class="col-lg-7">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                    </div>
+                    <form class="user" asp-action="Create">
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                       asp-for="Name" placeholder="First Name">
+                            </div>
+                            <div class="col-sm-6">
+                                <label asp-for="Department" class="control-label"></label>
+                                <select asp-for="Department" class="form-control">
+                                    <option value="1">軟體開發部</option>
+                                    <option value="2">人事部</option>
+                                    <option value="3">財務部</option>
+                                    <option value="4">客服部</option>
+                                    <option value="5">業務部</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input asp-for="Title" class="form-control" />
+                            </div>
+                            <div class="col-sm-6">
+                                <label asp-for="Age" class="control-label"></label>
+                                <input asp-for="Age" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary btn-user btn-block" />
+                        </div>
+                        <hr>
+                        <div>
+                            <a asp-action="Index">Back to List</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
