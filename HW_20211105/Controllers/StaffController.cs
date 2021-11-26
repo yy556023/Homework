@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HW_20211105.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace HW_20211105.Controllers
 {
@@ -21,6 +22,34 @@ namespace HW_20211105.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ActionName("Login")]
+        public IActionResult LoginPost(LoginArgs model)
+        {
+            var Data = _context.TblStaff
+                        .Where(x => x.Email == model.Email)
+                        .FirstOrDefault();
+
+            if (Data == null)
+            {
+                ViewBag.Msg = "查無此帳號";
+
+                return View("Error");
+            }
+
+            if (model.Password == Data.Password)
+            {
+                HttpContext.Session.SetString("LoginId", Guid.NewGuid().ToString());
+                return RedirectToAction("Index", "Staff");
+            }
+            else
+            {
+                ViewBag.Msg = "密碼錯誤，請重新操作";
+
+                return View("Error");
+            }
         }
 
 
@@ -187,6 +216,11 @@ namespace HW_20211105.Controllers
             return View(List);
         }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         private bool TblStaffExists(int id)
         {
             return _context.TblStaff.Any(e => e.Id == id);
@@ -194,7 +228,7 @@ namespace HW_20211105.Controllers
 
         [HttpPost]
         [ActionName("CreateAjax")]
-        public async Task<IActionResult> CreateAjax(TblStaff model)
+        public IActionResult CreateAjax(TblStaff model)
         {
             return RedirectToAction(nameof(Index));
         }
